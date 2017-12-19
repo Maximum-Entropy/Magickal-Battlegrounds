@@ -22,23 +22,21 @@ public class MagickalBattlegrounds extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (sender instanceof Player)
+		if (!(sender instanceof Player))
 			return false;
 		Player player = (Player) sender;
 
-		switch (command.getName()) {
+		switch (label) {
 		case "test":
 			return test(player);
-		case "testArgs":
+		case "testargs":
 			return testArgs(player, args);
-		case "arrow": {
+		case "arrow":
 			arrow(player, args);
 			return true;
-		}
-		case "grenade": {
+		case "grenade":
 			grenade(player, args);
 			return true;
-		}
 		default:
 			return false;
 		}
