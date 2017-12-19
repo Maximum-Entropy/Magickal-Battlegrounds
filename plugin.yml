@@ -1,0 +1,10 @@
+name: MagickalBackgrounds
+main: com.sprutusraypus.mb.MagickalBattlegrounds
+version: 1.0
+commands:
+	test:
+		description: 'Test command'
+		usage: '/test'
+	testArgs:
+		description: 'Test command w/ arguments'
+		usage: '/testArgs [arg1] [arg2] ...'
