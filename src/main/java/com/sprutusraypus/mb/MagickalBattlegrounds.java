@@ -2,7 +2,10 @@ package com.sprutusraypus.mb;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MagickalBattlegrounds extends JavaPlugin {
@@ -43,6 +46,23 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		// TODO
 
 		return true;
+	}
+	
+	private int arrow(Player player, String[] args) {
+		float speed = Float.parseFloat(args[0]);
+		float spread = Float.parseFloat(args[1]);
+		Arrow arrow = player.getWorld().spawnArrow(player.getLocation(), player.getLocation().getDirection(), speed, spread);
+		arrow.setShooter(player);
+		return arrow.getEntityId();
+	}
+	
+	private int grenade(Player player, String[] args) {
+		float speed = Float.parseFloat(args[0]);
+		Projectile grenade = (Projectile) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
+		grenade.setVelocity(player.getLocation().getDirection().multiply(speed));
+		grenade.setShooter(player);
+		grenade.setBounce(true);
+		return grenade.getEntityId();
 	}
 
 }

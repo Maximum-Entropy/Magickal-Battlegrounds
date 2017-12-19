@@ -8,3 +8,9 @@ commands:
 	testArgs:
 		description: 'Test command w/ arguments'
 		usage: '/testArgs [arg1] [arg2] ...'
+	arrow:
+	   description: 'Test arrow command'
+	   usage: '/arrow [speed] [spread]'
+	grenade:
+	   description: 'Test grenade command'
+	   usage: '/grenade [speed]'
