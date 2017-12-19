@@ -1,4 +1,4 @@
-package com.sprutusraypus.mb;
+package com.sprutusraypus;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,11 +26,19 @@ public class MagickalBattlegrounds extends JavaPlugin {
 			return false;
 		Player player = (Player) sender;
 
-		switch (label) {
+		switch (command.getName()) {
 		case "test":
 			return test(player);
 		case "testArgs":
 			return testArgs(player, args);
+		case "arrow": {
+			arrow(player, args);
+			return true;
+		}
+		case "grenade": {
+			grenade(player, args);
+			return true;
+		}
 		default:
 			return false;
 		}
@@ -38,24 +46,23 @@ public class MagickalBattlegrounds extends JavaPlugin {
 
 	private boolean test(Player player) {
 		// TODO
-
 		return true;
 	}
 
 	private boolean testArgs(Player player, String[] args) {
 		// TODO
-
 		return true;
 	}
-	
+
 	private int arrow(Player player, String[] args) {
 		float speed = Float.parseFloat(args[0]);
 		float spread = Float.parseFloat(args[1]);
-		Arrow arrow = player.getWorld().spawnArrow(player.getLocation(), player.getLocation().getDirection(), speed, spread);
+		Arrow arrow = player.getWorld().spawnArrow(player.getLocation(), player.getLocation().getDirection(), speed,
+				spread);
 		arrow.setShooter(player);
 		return arrow.getEntityId();
 	}
-	
+
 	private int grenade(Player player, String[] args) {
 		float speed = Float.parseFloat(args[0]);
 		Projectile grenade = (Projectile) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);

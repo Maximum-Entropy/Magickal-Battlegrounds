@@ -1,0 +1,17 @@
+name: MagickalBattlegrounds
+main: com.sprutusraypus.MagickalBattlegrounds
+version: 1.0
+author: [Teraleon, Raypus]
+commands:
+  test:
+    description: Test command
+    usage: /test
+  testArgs:
+    description: Test command w/ arguments
+    usage: /testArgs [arg1] [arg2] ...
+  arrow:
+    description: Test arrow command
+    usage: /arrow [speed] [spread]
+  grenade:
+    description: Test grenade command
+    usage: /grenade [speed]
