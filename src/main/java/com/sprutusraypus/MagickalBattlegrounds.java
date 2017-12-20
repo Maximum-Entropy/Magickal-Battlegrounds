@@ -1,5 +1,7 @@
 package com.sprutusraypus;
 
+import java.util.Arrays;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Arrow;
@@ -10,9 +12,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MagickalBattlegrounds extends JavaPlugin {
 
+	public SpecialProjectileListener SpecialProjectileListener;
+	
 	@Override
 	public void onEnable() {
-
+		SpecialProjectileListener = new SpecialProjectileListener();
+		this.getServer().getPluginManager().registerEvents(SpecialProjectileListener,this);
 	}
 
 	@Override
@@ -37,6 +42,10 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		case "grenade":
 			grenade(player, args);
 			return true;
+		case "wand":
+			wand(player, args);
+		case "for":
+			forCommand(player, args);
 		default:
 			return false;
 		}
@@ -55,7 +64,7 @@ public class MagickalBattlegrounds extends JavaPlugin {
 	private int arrow(Player player, String[] args) {
 		float speed = Float.parseFloat(args[0]);
 		float spread = Float.parseFloat(args[1]);
-		Arrow arrow = player.getWorld().spawnArrow(player.getLocation(), player.getLocation().getDirection(), speed,
+		Arrow arrow = player.getWorld().spawnArrow(player.getEyeLocation(), player.getLocation().getDirection(), speed,
 				spread);
 		arrow.setShooter(player);
 		return arrow.getEntityId();
@@ -66,8 +75,26 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		Projectile grenade = (Projectile) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
 		grenade.setVelocity(player.getLocation().getDirection().multiply(speed));
 		grenade.setShooter(player);
-		grenade.setBounce(true);
 		return grenade.getEntityId();
+	}
+	
+	private boolean wand(Player player, String[] args) {
+		String command = args[0];
+		
+		//TODO
+		
+		return true;
+	}
+	
+	private boolean forCommand(Player player, String[] args) {
+		int count = Integer.parseInt(args[0]);
+		String command = args[1];
+		args = Arrays.copyOfRange(args, 2, args.length);
+		for (int i = 0; i < count; i++) {
+			//TODO implement for other commands
+			arrow(player, args);
+		}
+		return true;
 	}
 
 }

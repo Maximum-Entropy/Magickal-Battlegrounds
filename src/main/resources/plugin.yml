@@ -15,3 +15,9 @@ commands:
   grenade:
     description: Test grenade command
     usage: /grenade [speed]
+  wand:
+    description: Bind a command to an item
+    usage: /wand [command] [arg1] [arg2] ...
+  for:
+    description: Runs a command a specified number of times
+    usage: /for [count] [command] [arg1] [arg1] ...
