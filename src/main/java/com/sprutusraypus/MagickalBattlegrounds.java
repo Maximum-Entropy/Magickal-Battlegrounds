@@ -2,11 +2,12 @@ package com.sprutusraypus;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.sprutusraypus.commands.ArrowCommand;
 
 public class MagickalBattlegrounds extends JavaPlugin {
 
@@ -16,6 +17,8 @@ public class MagickalBattlegrounds extends JavaPlugin {
 	public void onEnable() {
 		projectileListener = new SpecialProjectileListener();
 		getServer().getPluginManager().registerEvents(projectileListener, this);
+
+		getCommand("arrow").setExecutor(new ArrowCommand(this));
 	}
 
 	@Override
@@ -34,8 +37,6 @@ public class MagickalBattlegrounds extends JavaPlugin {
 			return test(player);
 		case "testargs":
 			return testArgs(player, args);
-		case "arrow":
-			return arrow(player, args);
 		case "grenade":
 			return grenade(player, args);
 		case "wand":
@@ -54,17 +55,6 @@ public class MagickalBattlegrounds extends JavaPlugin {
 
 	private boolean testArgs(Player player, String[] args) {
 		// TODO
-		return true;
-	}
-
-	private boolean arrow(Player player, String[] args) {
-		float speed = Float.parseFloat(args[0]);
-		float spread = Float.parseFloat(args[1]);
-		Arrow arrow = player.getWorld().spawnArrow(player.getEyeLocation(), player.getLocation().getDirection(), speed,
-				spread);
-		arrow.setShooter(player);
-		SpecialArrow arrowProjectile = new SpecialArrow(arrow);
-		projectileListener.registerProjectile(arrowProjectile);
 		return true;
 	}
 
