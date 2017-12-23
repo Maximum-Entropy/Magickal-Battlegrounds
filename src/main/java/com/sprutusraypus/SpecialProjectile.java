@@ -13,7 +13,9 @@ public abstract class SpecialProjectile{
 	}
 	
 	public abstract void entityHit(Projectile projectile, Entity entity);
+	
 	public abstract void blockHit(Projectile projectile, Block block);
+	
 	public void dispose() {
 		projectile.remove();
 	}

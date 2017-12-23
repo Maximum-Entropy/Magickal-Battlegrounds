@@ -17,7 +17,7 @@ public class MagickalBattlegrounds extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		SpecialProjectileListener = new SpecialProjectileListener();
-		this.getServer().getPluginManager().registerEvents(SpecialProjectileListener,this);
+		this.getServer().getPluginManager().registerEvents(SpecialProjectileListener, this);
 	}
 
 	@Override
@@ -41,7 +41,6 @@ public class MagickalBattlegrounds extends JavaPlugin {
 			return true;
 		case "grenade":
 			grenade(player, args);
-			return true;
 		case "wand":
 			wand(player, args);
 		case "for":
@@ -67,15 +66,17 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		Arrow arrow = player.getWorld().spawnArrow(player.getEyeLocation(), player.getLocation().getDirection(), speed,
 				spread);
 		arrow.setShooter(player);
+		SpecialArrow arrowProjectile = new SpecialArrow(arrow);
+		SpecialProjectileListener.registerProjectile(arrowProjectile);
 		return arrow.getEntityId();
 	}
 
-	private int grenade(Player player, String[] args) {
+	private boolean grenade(Player player, String[] args) {
 		float speed = Float.parseFloat(args[0]);
-		Projectile grenade = (Projectile) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
-		grenade.setVelocity(player.getLocation().getDirection().multiply(speed));
-		grenade.setShooter(player);
-		return grenade.getEntityId();
+		Projectile snowball = (Projectile) player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
+		snowball.setVelocity(player.getLocation().getDirection().multiply(speed));
+		snowball.setShooter(player);
+		return true;
 	}
 	
 	private boolean wand(Player player, String[] args) {
@@ -89,10 +90,12 @@ public class MagickalBattlegrounds extends JavaPlugin {
 	private boolean forCommand(Player player, String[] args) {
 		int count = Integer.parseInt(args[0]);
 		String command = args[1];
-		args = Arrays.copyOfRange(args, 2, args.length);
+		String output = "";
+		for (int i = 2; i < args.length; i++) {
+			output += " "+args[i];
+		}
 		for (int i = 0; i < count; i++) {
-			//TODO implement for other commands
-			arrow(player, args);
+			player.chat("/"+command+output);
 		}
 		return true;
 	}
