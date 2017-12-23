@@ -1,23 +1,21 @@
 package com.sprutusraypus;
 
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Projectile;
 
-public class SpecialArrow extends SpecialProjectile{
+public class SpecialArrow extends SpecialProjectile<Arrow> {
 
-	public SpecialArrow(Projectile projectile) {
-		super(projectile);
+	public SpecialArrow(Arrow arrow) {
+		super(arrow);
 	}
 
 	@Override
-	public void entityHit(Projectile projectile, Entity entity) {
-		
+	public void entityHit(Entity entity) {
 	}
 
 	@Override
-	public void blockHit(Projectile projectile, Block block) {
-		
+	public void blockHit(Block block) {
 	}
 
 }
