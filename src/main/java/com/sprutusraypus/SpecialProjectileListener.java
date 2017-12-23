@@ -31,6 +31,8 @@ public class SpecialProjectileListener implements Listener {
 
 		switch (proj.getType()) {
 		case ARROW:
+			break;
+		case SNOWBALL:
 			Player player = (Player) proj.getShooter();
 			player.chat("My special arrow hit the ground!");
 			break;

@@ -32,7 +32,7 @@ public class ArrowCommand implements CommandExecutor {
 		Arrow arrow = player.getWorld().spawnArrow(player.getEyeLocation(), player.getLocation().getDirection(), speed,
 				spread);
 		arrow.setShooter(player);
-		SpecialArrow arrowProjectile = new SpecialArrow(arrow);
+		SpecialArrow arrowProjectile = new SpecialArrow(context, arrow);
 		context.projectileListener.registerProjectile(arrowProjectile);
 		return true;
 	}
