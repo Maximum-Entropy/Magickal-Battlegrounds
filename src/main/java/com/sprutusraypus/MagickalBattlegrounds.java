@@ -1,7 +1,5 @@
 package com.sprutusraypus;
 
-import java.util.Arrays;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Arrow;
@@ -12,12 +10,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MagickalBattlegrounds extends JavaPlugin {
 
-	public SpecialProjectileListener SpecialProjectileListener;
-	
+	public SpecialProjectileListener projectileListener;
+
 	@Override
 	public void onEnable() {
-		SpecialProjectileListener = new SpecialProjectileListener();
-		this.getServer().getPluginManager().registerEvents(SpecialProjectileListener, this);
+		projectileListener = new SpecialProjectileListener();
+		getServer().getPluginManager().registerEvents(projectileListener, this);
 	}
 
 	@Override
@@ -37,14 +35,13 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		case "testargs":
 			return testArgs(player, args);
 		case "arrow":
-			arrow(player, args);
-			return true;
+			return arrow(player, args);
 		case "grenade":
-			grenade(player, args);
+			return grenade(player, args);
 		case "wand":
-			wand(player, args);
+			return wand(player, args);
 		case "for":
-			forCommand(player, args);
+			return forCommand(player, args);
 		default:
 			return false;
 		}
@@ -60,15 +57,15 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		return true;
 	}
 
-	private int arrow(Player player, String[] args) {
+	private boolean arrow(Player player, String[] args) {
 		float speed = Float.parseFloat(args[0]);
 		float spread = Float.parseFloat(args[1]);
 		Arrow arrow = player.getWorld().spawnArrow(player.getEyeLocation(), player.getLocation().getDirection(), speed,
 				spread);
 		arrow.setShooter(player);
 		SpecialArrow arrowProjectile = new SpecialArrow(arrow);
-		SpecialProjectileListener.registerProjectile(arrowProjectile);
-		return arrow.getEntityId();
+		projectileListener.registerProjectile(arrowProjectile);
+		return true;
 	}
 
 	private boolean grenade(Player player, String[] args) {
@@ -78,24 +75,23 @@ public class MagickalBattlegrounds extends JavaPlugin {
 		snowball.setShooter(player);
 		return true;
 	}
-	
+
 	private boolean wand(Player player, String[] args) {
-		String command = args[0];
-		
-		//TODO
-		
+		// String command = args[0];
+		// TODO
+
 		return true;
 	}
-	
+
 	private boolean forCommand(Player player, String[] args) {
 		int count = Integer.parseInt(args[0]);
 		String command = args[1];
 		String output = "";
 		for (int i = 2; i < args.length; i++) {
-			output += " "+args[i];
+			output += " " + args[i];
 		}
 		for (int i = 0; i < count; i++) {
-			player.chat("/"+command+output);
+			player.chat("/" + command + output);
 		}
 		return true;
 	}
